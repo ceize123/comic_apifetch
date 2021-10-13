@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.js"
+        integrity="sha512-nZmAl1ClAQ0kQ2EH3H6JMQHxNt2K7pGcgxQRoMpYuuuXyPnIGaMKNS7jwZRqBJhfSRYXc2myu+iKFbwhiCL3+w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let data = {};
+
+        const config = {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+            }
+        };
+
+        axios.get('https://xkcd.com/info.0.json', config)
+            .then(function (response) {
+                data = response.data;
+            })
+        // function makeAJAXRequest(method, url, data) {
+        //     if (data) { // Make an AJAX call using the provided data & method
+        //         fetch(url, {
+        //             method: method,
+        //             body: JSON.stringify(data),
+        //             headers: { 'Content-Type': 'application/json' },
+        //             mode: "no-cors",
+        //         })
+        //         .then(response => response.json())
+        //         .then(json => {
+        //             console.log(json);
+        //         });
+        //     } else {  // Make an AJAX call without providing data using the method
+        //         fetch(url, { method: method })
+        //             .then(response => response.json())
+        //             .then(json => {
+        //                 console.log(json);
+        //             });
+        //     }
+        // }
+        // function getAllUsers() {
+        //     makeAJAXRequest("GET", "/api/users", "https://xkcd.com/614/info.0.json");
+        // }
+
+        // function getUserById() {
+        //     makeAJAXRequest("GET", "/api/users/2");
+        // }
+
+    </script>
+</head>
+<body>
+    <p>Test the API by outputting to the browser console:</p>
+    <!-- Get All Users -->
+    <button type="button" onclick="getAllUsers()">Get All Users</button><br /><br />
+    <!-- Get User By Id -->
+    <button type="button" onclick="getUserById()">Get User</button><br /><br />
+</body>
+</html>
