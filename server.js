@@ -13,7 +13,6 @@ function onHttpStart() {
 }
 
 app.use(express.static('public'));
-const cors = require('cors');
 const corsOptions ={
     origin:'https://tranquil-peak-64703.herokuapp.com/', 
     credentials:true,            //access-control-allow-credentials:true
