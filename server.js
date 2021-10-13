@@ -13,7 +13,14 @@ function onHttpStart() {
 }
 
 app.use(express.static('public'));
-app.use(cors()); // Use this after the variable declaration
+const cors = require('cors');
+const corsOptions ={
+    origin:'https://tranquil-peak-64703.herokuapp.com/', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+// app.use(cors()); // Use this after the variable declaration
 
 app.get("/", function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
