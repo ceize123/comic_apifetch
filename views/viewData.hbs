@@ -5,29 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
+        integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <main class="container">
+        {{#if dt.num}}
+            <h1 id="num">{{dt.num}}</h1>
+            <p>Date created: 
+                <time datetime="{{dt.month}}-{{dt.day}}-{{dt.year}}">{{dt.month}}-{{dt.day}}-{{dt.year}}</time>
+            </p>
+            <h1 class="title">Title: {{dt.title}}</h1>
+            {{!-- if \n, new line --}}
+            <article class="tsptSection">
+                <p>Transcript: {{dt.transcript}}</p>
+            </article>
+            <div class="imgSection">
+                <img src="{{dt.img}}" alt="{{dt.alt}}">
+            </div>
+        {{else}}
+            <p>This comic number does not exist.</p>
+        {{/if}}
+        {{!-- limited to 0 to latest --}}
+        <div class="btnSection">
+            <button type="button" onclick="search(1)">Next</button>
+            <button type="button" onclick="search(-1)">Previous</button>
+            <button type="button" onclick="search(0)">Random Comic</button>
+        </div>
+        <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
+    </main>
     {{!-- <script src="all.js"></script> --}}
+
     <script>
-        function makeAJAXRequest(method, url) {
+        const makeAJAXRequest = (method, url) => {
             fetch(url, {
                 method: method,
                 headers: { 'Content-Type': 'application/json' },
                 mode: "no-cors",
             })
-            .then(() => {
-                window.location = url;
-            });
+                .then(() => {
+                    window.location = url;
+                });
         }
 
-        function nextComic() {
-            makeAJAXRequest("GET", ++num.textContent);
+        const nextComic = () => {
+            makeAJAXRequest("GET", parseInt(num.textContent) + 1);
         }
 
-        function previousComic() {
-            makeAJAXRequest("GET", --num.textContent);
+        const previousComic = () => {
+            makeAJAXRequest("GET", parseInt(num.textContent) - 1);
         }
 
-        function random() {
-            makeAJAXRequest("GET", num.textContent = Math.floor(Math.random() * 2528));
+        const random = () => {
+            makeAJAXRequest("GET", Math.floor(Math.random() * 2528));
         }
 
         const search = (select) => {
@@ -45,24 +78,23 @@
             }
         }
 
-    </script>
-</head>
+        const timePassed = () => {
+            let minute = document.querySelector(".minutes");
+            let second = document.querySelector(".seconds");
+        
+            setInterval(function () {
+                    if (parseInt(second.textContent) < 59)
+                        second.textContent = ('0' + parseInt(++second.textContent)).slice(-2);
+                    else if (parseInt(second.textContent) === 59) {
+                        second.textContent = '00';
+                        minute.textContent = parseInt(++minute.textContent);
+                    }
+                }, 1000);
+            
+        }
+        timePassed();
 
-<body>
-    {{!-- limited to 0 to latest --}}
-    
-    <button type="button" onclick="search(1)">Next</button><br /><br />
-    <button type="button" onclick="search(-1)">Previous</button><br /><br />
-    <button type="button" onclick="search(0)">Random Comic</button><br /><br />
-    <h1 id="num">{{dt.num}}</h1>
-    {{#if dt.num}}
-        <p>Date created: <time datetime="{{dt.month}}-{{dt.day}}-{{dt.year}}">{{dt.month}}-{{dt.day}}-{{dt.year}}</time></p>
-        {{!-- if \n, new line --}}
-        <p>Transcript: {{dt.transcript}}</p>
-        <img src="{{dt.img}}" alt="{{dt.alt}}">
-    {{else}}
-        <p>This comic number does not exist.</p>
-    {{/if}}
+    </script>
 </body>
 
 </html>

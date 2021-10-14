@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+//  General starts
+
+h1, h2, h3, h4, h5, h6, p, span, time, button {
+    color: red;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.title, .imgSection, .btnSection, .timePassed {
+    margin-top: 20px;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+//  General ends
+
+// imgSection starts
+.imgSection {
+    overflow: hidden;
+    img {
+        transition-duration: 1s;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+        &:hover {
+            transform: scale(1.05);
+        }    
+    }
+}
+
+// imgSection ends
+
+// btnSection starts
+.btnSection {
+    display: flex;
+    justify-content: space-evenly;
+
+    @keyframes scale {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.05); }
+        50% { transform: scale(1.1);
+            background: #000;
+            color: #fff; }
+        75% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    button {
+        border: none;
+        padding: 10px 20px;
+
+        &:hover {
+            animation-name: scale;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+	        animation-timing-function: linear;
+        }
+    }
+}
+
+// btnSection ends
