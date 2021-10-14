@@ -34,7 +34,8 @@ app.get('/', async (req, res) => {
 app.get("/:id", async (req, res) => {
     let url = `https://xkcd.com/${req.params.id}/info.0.json`;
     let data = await fetch(url)
-        .then((d) => d.json());
+        .then((d) => d.json())
+    .catch((err) => err);
         
     res.render('viewData', {
         dt: data,
