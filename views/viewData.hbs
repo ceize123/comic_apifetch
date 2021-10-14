@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.23.0/axios.js"
+        integrity="sha512-nZmAl1ClAQ0kQ2EH3H6JMQHxNt2K7pGcgxQRoMpYuuuXyPnIGaMKNS7jwZRqBJhfSRYXc2myu+iKFbwhiCL3+w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function makeAJAXRequest(method, url) {
+            fetch(url, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                mode: "no-cors",
+            })
+            .then(() => {
+                window.location = url;
+            });
+        }
+
+        function nextComic() {
+            let num = document.getElementById('num');
+            makeAJAXRequest("GET", ++num.textContent);
+        }
+
+        function previousComic() {
+            let num = document.getElementById('num');
+            makeAJAXRequest("GET", --num.textContent);
+        }
+    </script>
+</head>
+
+<body>
+    <button type="button" onclick="nextComic()">Next</button><br /><br />
+    <button type="button" onclick="previousComic()">Previous</button><br /><br />
+    <h1 id="num">{{dt.num}}</h1>
+    <p>{{dt.img}}</p>
+    <img src="{{dt.img}}" alt="{{dt.alt}}">
+</body>
+
+</html>
