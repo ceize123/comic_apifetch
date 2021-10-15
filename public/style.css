@@ -1,20 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+body {
+  background-color: #E5E5E5;
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6, p, span, time, button {
-  color: red;
+  color: #393A3D;
   font-family: "Roboto", sans-serif;
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 30px auto;
-}
-
-#title, .imgSection, .btnSection, .timePassed {
-  margin-top: 20px;
-}
-
-#title {
-  margin-bottom: 20px;
 }
 
 h1 {
@@ -23,26 +20,154 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 400;
+  font-size: 24px;
 }
 
-.imgSection {
-  overflow: hidden;
+.infoSection {
+  position: absolute;
+  top: 20px;
+  background-color: #34332F;
+  border-radius: 5px;
+  padding: 13px 75px;
+  text-align: center;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
 }
-.imgSection img {
+.infoSection h1, .infoSection p, .infoSection span, .infoSection time {
+  color: #FFFFFF;
+}
+
+.mainSection {
+  max-width: 85%;
+  margin: 80px auto 0;
+  position: relative;
+}
+.mainSection .foreground {
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  padding: 90px 55px 40px;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+}
+.mainSection .blurBackground {
+  background: linear-gradient(117.9deg, rgba(255, 255, 255, 0.4) 12.42%, rgba(255, 255, 255, 0.1) 85.57%);
+  box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 100%;
+  filter: blur(4px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 20px;
+}
+@keyframes blueAni {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+    top: -100px;
+    right: -150px;
+  }
+  50% {
+    transform: scale(1.1);
+    top: -60px;
+    right: -235px;
+  }
+  75% {
+    transform: scale(1.05);
+    top: 0px;
+    right: -155px;
+  }
+  100% {
+    transform: scale(1);
+    top: -60px;
+    right: -75px;
+  }
+}
+@keyframes purpleAni {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.mainSection .circle {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+}
+.mainSection .blueCircle {
+  top: -60px;
+  right: -75px;
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(205.7deg, #60F0FA 15.54%, #052DFF 87.12%);
+  animation-name: blueAni;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.mainSection .purpleCircle {
+  bottom: -60px;
+  left: -80px;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(126.75deg, #D9C1FF 14.94%, #6000FE 93.17%);
+  animation-name: purpleAni;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.mainSection .yellowCircle {
+  right: 120px;
+  bottom: -45px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(306.94deg, #FFD544 22.85%, #FF964E 75.53%);
+}
+.mainSection .tsptSection {
+  margin-top: 20px;
+}
+.mainSection .tsptSection #transcript {
+  margin-top: 10px;
+}
+.mainSection .imgSection {
+  overflow: hidden;
+  margin-top: 30px;
+}
+.mainSection .imgSection img {
   transition-duration: 1s;
   max-width: 100%;
+  max-height: 100%;
   display: block;
   margin: 0 auto;
 }
-.imgSection img:hover {
+.mainSection .imgSection img:hover {
   transform: scale(1.05);
 }
 
-.btnSection {
+.btnAndtimeSection {
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+.btnAndtimeSection .timePassed, .btnAndtimeSection button {
+  font-size: 14px;
+}
+.btnAndtimeSection .btns {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 @keyframes scale {
   0% {
@@ -53,7 +178,7 @@ h2 {
   }
   50% {
     transform: scale(1.1);
-    background: #000;
+    background: #393A3D;
     color: #fff;
   }
   75% {
@@ -63,15 +188,27 @@ h2 {
     transform: scale(1);
   }
 }
-.btnSection button {
+.btnAndtimeSection .btns button {
   border: none;
-  padding: 10px 20px;
+  font-weight: 700;
+  padding: 12px 0;
+  width: 108px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
 }
-.btnSection button:hover {
+.btnAndtimeSection .btns button:hover {
   animation-name: scale;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+.btnAndtimeSection .btns button:not(:last-of-type) {
+  margin-right: 50px;
+}
+.btnAndtimeSection .timePassed {
+  margin-top: 15px;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

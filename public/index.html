@@ -11,25 +11,37 @@
 </head>
 <body onload="loadingRequest('GET')">
     <main class="container">
-        <h1 id="num"></h1>
-        <p>Date created:
-            <time id="time"></time>
-        </p>
-        <h1 id="title"></h1>
-        <article class="tsptSection">
-            <h2>Transcript:</h2>
-            <p id="transcript"></p>
-        </article>
-        <div class="imgSection">
-            <img id="comic" src="" alt="">
-        </div>
-        <!-- <p>This comic number does not exist.</p> -->
-        <div class="btnSection">
-            <button class="button" type="button" onclick="search(1)">Next</button>
-            <button class="button" type="button" onclick="search(-1)">Previous</button>
-            <button class="button" type="button" onclick="search(0)">Random Comic</button>
-        </div>
-        <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
+        <section class="infoSection">
+            <h1>No. <span id="num"></span></h1>
+            <p>Date created:
+                <time id="time"></time>
+            </p>
+        </section>
+        <section class="mainSection">
+            <div class="blurBackground"></div>
+            <div class="circle blueCircle"></div>
+            <div class="circle purpleCircle"></div>
+            <div class="circle yellowCircle"></div>
+            <div class="foreground">
+                <h1 id="title"></h1>
+                <article class="tsptSection">
+                    <h2>Transcript:</h2>
+                    <p id="transcript"></p>
+                </article>
+                <div class="imgSection">
+                    <img id="comic" src="" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="btnAndtimeSection">
+            <div class="btns">
+                <button class="button" type="button" onclick="search(-1)">Previous</button>
+                <button class="button" type="button" onclick="search(0)">Random Comic</button>
+                <button class="button" type="button" onclick="search(1)">Next</button>
+            </div>
+            <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
+        </section>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

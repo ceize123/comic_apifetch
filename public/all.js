@@ -2,6 +2,20 @@ let max = Infinity;
 let minute = document.querySelector(".minutes");
 let second = document.querySelector(".seconds");
 
+const getLatestNum = () => {
+    fetch(`/api`, {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' },
+        mode: "no-cors",
+    }).then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            max = response.num;
+        });
+};
+getLatestNum();
+
 const loadingRequest = method => {
     let path = window.location.pathname.replace('/', '');
     let comicNum = "";
@@ -12,19 +26,15 @@ const loadingRequest = method => {
         method: method,
         headers: { 'Content-Type': 'application/json' },
         mode: "no-cors",
-    })
-    .then((response) => {
+    }).then((response) => {
         return response.json();
-    })
-    .then((response) => {
-        max = response.num; 
-        document.getElementById('num').textContent = response.num;
-        document.getElementById('time').textContent = `${response.month}-${response.day}-${response.year}`;
+    }).then((response) => {
+        document.getElementById('num').innerHTML = response.num;
+        document.getElementById('time').innerHTML = `${response.month}-${response.day}-${response.year}`;
         document.getElementById('time').setAttribute("datetime",`${response.month}-${response.day}-${response.year}`);
-        document.getElementById('title').textContent = response.title;
+        document.getElementById('title').innerHTML = response.title;
         let transcript = response.transcript.replace(/(?:\r\n|\r|\n)/g, '<br>');
         document.getElementById('transcript').innerHTML = transcript;
-        console.log(response.transcript);
         document.getElementById('comic').src = response.img;
     });
 };
@@ -49,17 +59,15 @@ const makeAJAXRequest = (method, comicNum) => {
         method: method,
         headers: { 'Content-Type': 'application/json' },
         mode: "no-cors",
-    })
-    .then((response) => {
+    }).then((response) => {
         // window.location = url;
         return response.json();
-    })
-    .then((response) => {
+    }).then((response) => {
         if (response.num) {
-            document.getElementById('num').textContent = response.num;
-            document.getElementById('time').textContent = `${response.month}-${response.day}-${response.year}`;
+            document.getElementById('num').innerHTML = response.num;
+            document.getElementById('time').innerHTML = `${response.month}-${response.day}-${response.year}`;
             document.getElementById('time').setAttribute("datetime",`${response.month}-${response.day}-${response.year}`);
-            document.getElementById('title').textContent = response.title;
+            document.getElementById('title').innerHTML = response.title;
             let transcript = response.transcript.replace(/(?:\r\n|\r|\n)/g, '<br>');
             document.getElementById('transcript').innerHTML = transcript;
             document.getElementById('comic').src = response.img;
@@ -87,7 +95,7 @@ const previousComic = (num) => {
 
 const random = () => {
     resetTime();
-    makeAJAXRequest("GET", Math.floor(Math.random() * max + 1));
+    makeAJAXRequest("GET", Math.floor(Math.random() * max));
 };
 
 
