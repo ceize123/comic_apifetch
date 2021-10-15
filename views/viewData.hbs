@@ -37,7 +37,11 @@
         </div>
         <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
     </main>
-    {{!-- <script src="all.js"></script> --}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./all.js"></script>
 
     <script>
         const makeAJAXRequest = (method, url) => {
@@ -46,13 +50,17 @@
                 headers: { 'Content-Type': 'application/json' },
                 mode: "no-cors",
             })
-                .then(() => {
-                    window.location = url;
-                });
+            .then((response) => {
+                console.log(response.ok);
+            })
+            .then(() => {
+                window.location = url;
+            });
         }
 
         const nextComic = () => {
             makeAJAXRequest("GET", parseInt(num.textContent) + 1);
+            
         }
 
         const previousComic = () => {

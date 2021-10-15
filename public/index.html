@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
+        integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body onload="loadingRequest('GET')">
+    <main class="container">
+        <h1 id="num"></h1>
+        <p>Date created:
+            <time id="time"></time>
+        </p>
+        <h1 id="title"></h1>
+        <article class="tsptSection">
+            <h2>Transcript:</h2>
+            <p id="transcript"></p>
+        </article>
+        <div class="imgSection">
+            <img id="comic" src="" alt="">
+        </div>
+        <!-- <p>This comic number does not exist.</p> -->
+        <div class="btnSection">
+            <button class="button" type="button" onclick="search(1)">Next</button>
+            <button class="button" type="button" onclick="search(-1)">Previous</button>
+            <button class="button" type="button" onclick="search(0)">Random Comic</button>
+        </div>
+        <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./all.js"></script>
+</body>
+</html>
