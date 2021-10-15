@@ -5,10 +5,11 @@ let count = 50;
 let minute = document.querySelector(".minutes");
 let second = document.querySelector(".seconds");
 
+// get latest comic number
 const getLatestNum = () => {
     fetch(`/api`, {
         method: "GET",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         mode: "no-cors",
     }).then((response) => {
             return response.json();
@@ -19,46 +20,38 @@ const getLatestNum = () => {
 };
 getLatestNum();
 
+
+// DOM manipulation
+const domManip = (response) => {
+    document.getElementById("num").innerHTML = response.num;
+    document.getElementById("time").innerHTML = `${response.month}-${response.day}-${response.year}`;
+    document.getElementById("time").setAttribute("datetime", `${response.month}-${response.day}-${response.year}`);
+    document.getElementById("title").innerHTML = response.title;
+    let transcript = response.transcript.replace(/(?:\r\n|\r|\n)/g, "<br>");
+    document.getElementById("transcript").innerHTML = transcript;
+    document.getElementById("comic").src = response.img;
+};
+
+// run the request every time the page reloads
 const loadingRequest = method => {
-    let path = window.location.pathname.replace('/', '');
+    let path = window.location.pathname.replace("/", "");
     let comicNum = "";
-    if (path !== '') {
+    if (path !== "") {
         comicNum = path;
     }
     fetch(`/api/${comicNum}`, {
         method: method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         mode: "no-cors",
     }).then((response) => {
         return response.json();
     }).then((response) => {
-        // document.getElementById('loadingPage').style.display = 'none';
         loadingAnimation();
-        document.getElementById('num').innerHTML = response.num;
-        document.getElementById('time').innerHTML = `${response.month}-${response.day}-${response.year}`;
-        document.getElementById('time').setAttribute("datetime",`${response.month}-${response.day}-${response.year}`);
-        document.getElementById('title').innerHTML = response.title;
-        let transcript = response.transcript.replace(/(?:\r\n|\r|\n)/g, '<br>');
-        document.getElementById('transcript').innerHTML = transcript;
-        document.getElementById('comic').src = response.img;
+        domManip(response);
     });
 };
 
 const makeAJAXRequest = (method, comicNum) => {
-    // if ((comicNum > max || comicNum <= 1) && comicNum !== "") {
-    //     alert("Hi");
-    //     return;
-    // }
-
-    // console.log(max);
-    // console.log(window.location.pathname);
-    // let path = window.location.pathname.replace('/', '');
-    
-    // if (path !== '') {
-    //     comicNum = path;
-    // }
-    // console.log(path);
-    // console.log(comicNum);
     if (comicNum === "") {
         swal({
             title: "Please Input a number",
@@ -70,20 +63,14 @@ const makeAJAXRequest = (method, comicNum) => {
 
     fetch(`/api/${comicNum}`, {
         method: method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         mode: "no-cors",
     }).then((response) => {
         // window.location = url;
         return response.json();
     }).then((response) => {
         if (response.num) {
-            document.getElementById('num').innerHTML = response.num;
-            document.getElementById('time').innerHTML = `${response.month}-${response.day}-${response.year}`;
-            document.getElementById('time').setAttribute("datetime",`${response.month}-${response.day}-${response.year}`);
-            document.getElementById('title').innerHTML = response.title;
-            let transcript = response.transcript.replace(/(?:\r\n|\r|\n)/g, '<br>');
-            document.getElementById('transcript').innerHTML = transcript;
-            document.getElementById('comic').src = response.img;
+            domManip(response);
             history.pushState({}, null, `${comicNum}`);
         } else {
             swal({
@@ -95,6 +82,8 @@ const makeAJAXRequest = (method, comicNum) => {
     });
 };
 
+
+// loading animation
 const loadingAnimation = () => {
     const loadingBar = setInterval(function () {
         loadingPercent.style.width = `${++count}px`;
@@ -104,8 +93,10 @@ const loadingAnimation = () => {
             document.body.style.overflowY = "scroll";
         }
     }, 10);
-}
+};
 
+
+// function for buttons
 const nextComic = (num) => {
     resetTime();
     makeAJAXRequest("GET", parseInt(num.textContent) + 1);
@@ -122,8 +113,8 @@ const random = () => {
 };
 
 const search = (select) => {
-    let num = document.getElementById('num');
-    let comicID = document.getElementById('comicID');
+    let num = document.getElementById("num");
+    let comicID = document.getElementById("comicID");
     switch (select) {
         case 1:
             nextComic(num);
@@ -140,11 +131,13 @@ const search = (select) => {
     }
 };
 
+
+// logic for time passed counting
 const timePassed = () => {
     if (parseInt(second.textContent) < 59)
-        second.textContent = ('0' + parseInt(++second.textContent)).slice(-2);
+        second.textContent = ("0" + parseInt(++second.textContent)).slice(-2);
     else if (parseInt(second.textContent) === 59) {
-        second.textContent = '00';
+        second.textContent = "00";
         minute.textContent = parseInt(++minute.textContent);
     }
 };
@@ -153,7 +146,7 @@ let timeSet = setInterval(timePassed, 1000);
 
 const resetTime = () => {
     clearInterval(timeSet);
-    second.textContent = '00';
-    minute.textContent = '00';
+    second.textContent = "00";
+    minute.textContent = "00";
     timeSet = setInterval(timePassed, 1000);
-}
+};

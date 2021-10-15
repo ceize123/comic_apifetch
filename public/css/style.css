@@ -173,25 +173,6 @@ p {
 .btnAndtimeSection .timePassed, .btnAndtimeSection button {
   font-size: 14px;
 }
-@keyframes scale {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.05);
-  }
-  50% {
-    transform: scale(1.1);
-    background: #393A3D;
-    color: #E5E5E5;
-  }
-  75% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 .btnAndtimeSection button {
   border: none;
   font-weight: 700;
@@ -200,12 +181,6 @@ p {
   background: #FFFFFF;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
-}
-.btnAndtimeSection button:hover {
-  animation-name: scale;
-  animation-duration: 1.5s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
 }
 .btnAndtimeSection .btns {
   display: flex;
@@ -227,6 +202,16 @@ p {
   text-align: center;
 }
 
+@media only screen and (min-width: 1200px) {
+  .btnAndtimeSection button {
+    transition-duration: 0.5s;
+  }
+  .btnAndtimeSection button:hover {
+    transform: scale(1.1);
+    background: #393A3D;
+    color: #E5E5E5;
+  }
+}
 @media only screen and (max-width: 576px) {
   h1 {
     font-size: 24px;
@@ -243,6 +228,10 @@ p {
 
   .mainSection .foreground {
     padding: 50px 30px 30px;
+  }
+  .mainSection .blurBackground {
+    background: linear-gradient(117.9deg, rgba(255, 255, 255, 0.4) 12.42%, rgba(255, 255, 255, 0.1) 85.57%);
+    box-shadow: 0px 2px 12px -1px rgba(0, 0, 0, 0.25);
   }
   .mainSection .blueCircle, .mainSection .yellowCircle {
     display: none;

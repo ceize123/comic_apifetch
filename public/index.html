@@ -7,21 +7,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
         integrity="sha512-IJEbgDEF7OeKJRa0MY2PApnyJHRIsgzCveek4ec8VWQ+7KG3ZSKVNYa5xP/Gh0hVP0Mwb+gBsk+GwR3JQGhQNg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body onload="loadingRequest('GET')">
+    <!-- loading -->
     <div class="loadingPage">
         <div class="loadingBar">
             <div class="percent"></div>
         </div>
     </div>
+    <!-- loading -->
+    <!-- main -->
     <main class="container">
+        <!-- info section -->
         <section class="infoSection">
             <h1>No. <span id="num"></span></h1>
             <p>Date created:
                 <time id="time"></time>
             </p>
         </section>
+        <!-- info section -->
+        <!-- main section -->
         <section class="mainSection">
             <div class="blurBackground"></div>
             <div class="circle blueCircle"></div>
@@ -38,6 +44,8 @@
                 </div>
             </div>
         </section>
+        <!-- main section -->
+        <!-- buttons and time section -->
         <section class="btnAndtimeSection">
             <div class="btns">
                 <button type="button" onclick="search(-1)">Previous</button>
@@ -50,7 +58,9 @@
             </div>
             <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
         </section>
+        <!-- buttons and time section -->
     </main>
+    <!-- main -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
