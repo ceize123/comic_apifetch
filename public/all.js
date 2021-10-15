@@ -1,4 +1,7 @@
 let max = Infinity;
+let loadingPage = document.querySelector(".loadingPage");
+let loadingPercent = document.querySelector(".percent");
+let count = 50;
 let minute = document.querySelector(".minutes");
 let second = document.querySelector(".seconds");
 
@@ -29,6 +32,8 @@ const loadingRequest = method => {
     }).then((response) => {
         return response.json();
     }).then((response) => {
+        // document.getElementById('loadingPage').style.display = 'none';
+        loadingAnimation();
         document.getElementById('num').innerHTML = response.num;
         document.getElementById('time').innerHTML = `${response.month}-${response.day}-${response.year}`;
         document.getElementById('time').setAttribute("datetime",`${response.month}-${response.day}-${response.year}`);
@@ -54,6 +59,14 @@ const makeAJAXRequest = (method, comicNum) => {
     // }
     // console.log(path);
     // console.log(comicNum);
+    if (comicNum === "") {
+        swal({
+            title: "Please Input a number",
+            icon: "warning",
+            dangerMode: true,
+        });
+        return;
+    }
 
     fetch(`/api/${comicNum}`, {
         method: method,
@@ -82,10 +95,20 @@ const makeAJAXRequest = (method, comicNum) => {
     });
 };
 
+const loadingAnimation = () => {
+    const loadingBar = setInterval(function () {
+        loadingPercent.style.width = `${++count}px`;
+        if (count > 200) {
+            loadingPage.classList.add("complete");
+            clearInterval(loadingBar);
+            document.body.style.overflowY = "scroll";
+        }
+    }, 10);
+}
+
 const nextComic = (num) => {
     resetTime();
     makeAJAXRequest("GET", parseInt(num.textContent) + 1);
-    
 };
 
 const previousComic = (num) => {
@@ -98,10 +121,9 @@ const random = () => {
     makeAJAXRequest("GET", Math.floor(Math.random() * max));
 };
 
-
-
 const search = (select) => {
     let num = document.getElementById('num');
+    let comicID = document.getElementById('comicID');
     switch (select) {
         case 1:
             nextComic(num);
@@ -111,6 +133,9 @@ const search = (select) => {
             break;
         case 0:
             random();
+            break;
+        default:
+            makeAJAXRequest("GET", comicID.value);
             break;
     }
 };

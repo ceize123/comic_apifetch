@@ -6,7 +6,7 @@ $secondary: #E5E5E5;
 //  General starts
 body {
     background-color: $secondary;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, time, button {
@@ -27,6 +27,43 @@ h1 {
 h2 {
     font-size: 24px;
 }
+
+p {
+    font-size: 18px;
+}
+
+.loadingPage {
+    background-color: $primary;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+
+    .loadingBar {
+        overflow: hidden;
+        width: 200px;
+        height: 30px;
+        border-radius: 20px;
+        background-color: $secondary;
+        margin-left: 50%;
+        transform: translateX(-50%);
+
+        .percent {
+            height: 100%;
+            width: 50px;
+            background-color: #FFD544;
+        }
+    }
+}
+
+.complete {
+    transform: scale(0);
+    transition-duration: 0.5s;
+}
+
 //  General ends
 
 
@@ -38,10 +75,14 @@ h2 {
     border-radius: 5px;
     padding: 13px 75px;
     text-align: center;
-    z-index: 999;
+    z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
     h1, p, span, time {
         color: #FFFFFF;
+    }
+
+    p {
+        margin-top: 5px;
     }
 }
 
@@ -74,30 +115,6 @@ h2 {
         left: 0;
         border-radius: 20px;
     }
-    
-    @keyframes blueAni {
-        0% { transform: scale(1); }
-        25% { 
-            transform: scale(1.05); 
-            top: -100px;
-            right: -150px;
-        }
-        50% { 
-            transform: scale(1.1);
-            top: -60px;
-            right: -235px;
-        }
-        75% { 
-            transform: scale(1.05); 
-            top: 0px;
-            right: -155px;
-        }
-        100% { 
-            transform: scale(1); 
-            top: -60px;
-            right: -75px;
-        }
-    }
 
     @keyframes purpleAni {
         0% { transform: scale(1); }
@@ -120,10 +137,6 @@ h2 {
         width: 250px;
         height: 250px;
         background: linear-gradient(205.7deg, #60F0FA 15.54%, #052DFF 87.12%);
-        animation-name: blueAni;
-        animation-duration: 8s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
     }
     .purpleCircle {
         bottom: -60px;
@@ -185,47 +198,101 @@ h2 {
         font-size: 14px;
     }
 
+    @keyframes scale {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.05); }
+        50% { transform: scale(1.1);
+            background: $primary;
+            color: $secondary; }
+        75% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    button {
+        border: none;
+        font-weight: 700;
+        padding: 12px 0;
+        width: 108px;
+        background: #FFFFFF;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
+
+        &:hover {
+            animation-name: scale;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+    }
 
     .btns {
         display: flex;
         justify-content: center;
     
-        @keyframes scale {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.05); }
-            50% { transform: scale(1.1);
-                background: $primary;
-                color: #fff; }
-            75% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    
-        button {
-            border: none;
-            font-weight: 700;
-            padding: 12px 0;
-            width: 108px;
-            background: #FFFFFF;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
-    
-            &:hover {
-                animation-name: scale;
-                animation-duration: 1.5s;
-                animation-iteration-count: infinite;
-                animation-timing-function: linear;
-            }
+        button:not(:last-of-type) {
+            margin-right: 50px;
+        } 
+    }
 
-            &:not(:last-of-type) {
-                margin-right: 50px;
-            }
+    .searchBar {
+        input {
+            width: 200px;
+            border-radius: 5px;
+            height: 30px;
+            margin-right: 20px;
+            border: none;
+            text-indent: 5px;
         }
     }
 
-    .timePassed {
+    .timePassed, .searchBar {
         margin-top: 15px;
         text-align: center;
     }
 }
 
 // btnAndtimeSection ends
+
+
+// responsive under 576px
+@media only screen and (max-width: 576px) {
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .mainSection {
+        .foreground {
+            padding: 50px 30px 30px;
+        }
+
+        .blueCircle, .yellowCircle {
+            display: none;
+        }
+    }
+
+    .btnAndtimeSection {
+        .btns {
+            display: flex;
+            justify-content: center;
+        
+            button:not(:last-of-type) {
+                margin-right: 20px;
+            } 
+        }
+
+        .searchBar {
+            input {
+                width: 150px;
+            }
+        }
+    }
+}

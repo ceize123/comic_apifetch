@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 body {
   background-color: #E5E5E5;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6, p, span, time, button {
@@ -23,6 +23,40 @@ h2 {
   font-size: 24px;
 }
 
+p {
+  font-size: 18px;
+}
+
+.loadingPage {
+  background-color: #393A3D;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+}
+.loadingPage .loadingBar {
+  overflow: hidden;
+  width: 200px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: #E5E5E5;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.loadingPage .loadingBar .percent {
+  height: 100%;
+  width: 50px;
+  background-color: #FFD544;
+}
+
+.complete {
+  transform: scale(0);
+  transition-duration: 0.5s;
+}
+
 .infoSection {
   position: absolute;
   top: 20px;
@@ -30,11 +64,14 @@ h2 {
   border-radius: 5px;
   padding: 13px 75px;
   text-align: center;
-  z-index: 999;
+  z-index: 1;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
 }
 .infoSection h1, .infoSection p, .infoSection span, .infoSection time {
   color: #FFFFFF;
+}
+.infoSection p {
+  margin-top: 5px;
 }
 
 .mainSection {
@@ -60,31 +97,6 @@ h2 {
   top: 0;
   left: 0;
   border-radius: 20px;
-}
-@keyframes blueAni {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.05);
-    top: -100px;
-    right: -150px;
-  }
-  50% {
-    transform: scale(1.1);
-    top: -60px;
-    right: -235px;
-  }
-  75% {
-    transform: scale(1.05);
-    top: 0px;
-    right: -155px;
-  }
-  100% {
-    transform: scale(1);
-    top: -60px;
-    right: -75px;
-  }
 }
 @keyframes purpleAni {
   0% {
@@ -114,10 +126,6 @@ h2 {
   width: 250px;
   height: 250px;
   background: linear-gradient(205.7deg, #60F0FA 15.54%, #052DFF 87.12%);
-  animation-name: blueAni;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
 }
 .mainSection .purpleCircle {
   bottom: -60px;
@@ -165,10 +173,6 @@ h2 {
 .btnAndtimeSection .timePassed, .btnAndtimeSection button {
   font-size: 14px;
 }
-.btnAndtimeSection .btns {
-  display: flex;
-  justify-content: center;
-}
 @keyframes scale {
   0% {
     transform: scale(1);
@@ -179,7 +183,7 @@ h2 {
   50% {
     transform: scale(1.1);
     background: #393A3D;
-    color: #fff;
+    color: #E5E5E5;
   }
   75% {
     transform: scale(1.05);
@@ -188,7 +192,7 @@ h2 {
     transform: scale(1);
   }
 }
-.btnAndtimeSection .btns button {
+.btnAndtimeSection button {
   border: none;
   font-weight: 700;
   padding: 12px 0;
@@ -197,18 +201,63 @@ h2 {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 5px 10px, rgba(0, 0, 0, 0.23) 0px 3px 3px;
 }
-.btnAndtimeSection .btns button:hover {
+.btnAndtimeSection button:hover {
   animation-name: scale;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
+.btnAndtimeSection .btns {
+  display: flex;
+  justify-content: center;
+}
 .btnAndtimeSection .btns button:not(:last-of-type) {
   margin-right: 50px;
 }
-.btnAndtimeSection .timePassed {
+.btnAndtimeSection .searchBar input {
+  width: 200px;
+  border-radius: 5px;
+  height: 30px;
+  margin-right: 20px;
+  border: none;
+  text-indent: 5px;
+}
+.btnAndtimeSection .timePassed, .btnAndtimeSection .searchBar {
   margin-top: 15px;
   text-align: center;
+}
+
+@media only screen and (max-width: 576px) {
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .mainSection .foreground {
+    padding: 50px 30px 30px;
+  }
+  .mainSection .blueCircle, .mainSection .yellowCircle {
+    display: none;
+  }
+
+  .btnAndtimeSection .btns {
+    display: flex;
+    justify-content: center;
+  }
+  .btnAndtimeSection .btns button:not(:last-of-type) {
+    margin-right: 20px;
+  }
+  .btnAndtimeSection .searchBar input {
+    width: 150px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

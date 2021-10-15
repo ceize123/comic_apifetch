@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body onload="loadingRequest('GET')">
+    <div class="loadingPage">
+        <div class="loadingBar">
+            <div class="percent"></div>
+        </div>
+    </div>
     <main class="container">
         <section class="infoSection">
             <h1>No. <span id="num"></span></h1>
@@ -35,9 +40,13 @@
         </section>
         <section class="btnAndtimeSection">
             <div class="btns">
-                <button class="button" type="button" onclick="search(-1)">Previous</button>
-                <button class="button" type="button" onclick="search(0)">Random Comic</button>
-                <button class="button" type="button" onclick="search(1)">Next</button>
+                <button type="button" onclick="search(-1)">Previous</button>
+                <button type="button" onclick="search(0)">Random Comic</button>
+                <button type="button" onclick="search(1)">Next</button>
+            </div>
+            <div class="searchBar">
+                <input type="number" id="comicID" placeholder="Comic Number">
+                <button type="button" onclick="search()">Submit</button>
             </div>
             <p class="timePassed">Time passed: <span class="minutes">00</span>:<span class="seconds">00</span></p>
         </section>
