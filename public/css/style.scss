@@ -40,9 +40,16 @@ p {
     height: 100vh;
     z-index: 999;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        color: $secondary;
+        text-align: center;
+    }
 
     .loadingBar {
+        margin-top: 20px;
         overflow: hidden;
         width: 200px;
         height: 30px;
@@ -61,7 +68,12 @@ p {
 
 .complete {
     transform: scale(0);
-    transition-duration: 0.5s;
+    transition-delay: 0.5s;
+    transition-duration: 0.7s;
+    h1 {
+        transition-duration: 0.6s;
+        transform: scale(1.1);
+    }
 }
 
 //  General ends

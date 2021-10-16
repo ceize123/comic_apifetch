@@ -85,12 +85,15 @@ const makeAJAXRequest = (method, comicNum) => {
 
 // loading animation
 const loadingAnimation = () => {
-    const loadingBar = setInterval(function () {
+    const loadingBar = setInterval(() => {
         loadingPercent.style.width = `${++count}px`;
         if (count > 200) {
+            loadingPage.childNodes[1].textContent = "Completed!";
             loadingPage.classList.add("complete");
-            clearInterval(loadingBar);
-            document.body.style.overflowY = "scroll";
+            setTimeout(()=> { 
+                clearInterval(loadingBar);
+                document.body.style.overflowY = "scroll";
+             }, 1000);
         }
     }, 10);
 };
