@@ -181,7 +181,7 @@ p {
   margin-top: 35px;
   margin-bottom: 20px;
 }
-.btnAndtimeSection .timePassed, .btnAndtimeSection button {
+.btnAndtimeSection .timePassed, .btnAndtimeSection .counter, .btnAndtimeSection button {
   font-size: 14px;
 }
 .btnAndtimeSection button {
@@ -208,7 +208,7 @@ p {
   border: none;
   text-indent: 5px;
 }
-.btnAndtimeSection .timePassed, .btnAndtimeSection .searchBar {
+.btnAndtimeSection .timePassed, .btnAndtimeSection .counter, .btnAndtimeSection .searchBar {
   margin-top: 15px;
   text-align: center;
 }

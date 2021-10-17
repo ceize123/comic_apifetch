@@ -1,7 +1,8 @@
 let max = Infinity;
 let loadingPage = document.querySelector(".loadingPage");
 let loadingPercent = document.querySelector(".percent");
-let count = 50;
+let loadingBarWidth = 50; // starts with 50px
+let counter = {};
 let minute = document.querySelector(".minutes");
 let second = document.querySelector(".seconds");
 
@@ -30,6 +31,7 @@ const domManip = (response) => {
     let transcript = response.transcript.replace(/(?:\r\n|\r|\n)/g, "<br>");
     document.getElementById("transcript").innerHTML = transcript;
     document.getElementById("comic").src = response.img;
+    document.getElementById("countedNum").innerHTML = counter[response.num];
 };
 
 // run the request every time the page reloads
@@ -47,6 +49,7 @@ const loadingRequest = method => {
         return response.json();
     }).then((response) => {
         loadingAnimation();
+        viewedCounting(response.num);
         domManip(response);
     });
 };
@@ -70,6 +73,7 @@ const makeAJAXRequest = (method, comicNum) => {
         return response.json();
     }).then((response) => {
         if (response.num) {
+            viewedCounting(response.num);
             domManip(response);
             history.pushState({}, null, `${comicNum}`);
         } else {
@@ -86,8 +90,8 @@ const makeAJAXRequest = (method, comicNum) => {
 // loading animation
 const loadingAnimation = () => {
     const loadingBar = setInterval(() => {
-        loadingPercent.style.width = `${++count}px`;
-        if (count > 200) {
+        loadingPercent.style.width = `${++loadingBarWidth}px`;
+        if (loadingBarWidth > 200) {
             loadingPage.childNodes[1].textContent = "Completed!";
             loadingPage.classList.add("complete");
             setTimeout(()=> { 
@@ -131,6 +135,16 @@ const search = (select) => {
         default:
             makeAJAXRequest("GET", comicID.value);
             break;
+    }
+};
+
+
+// counter
+const viewedCounting = (num) => {
+    if (counter[num] === undefined) {
+        counter[num] = 1;
+    } else {
+        counter[num]++;
     }
 };
 
