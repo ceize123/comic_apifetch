@@ -72,13 +72,13 @@ const makeAJAXRequest = (method, comicNum) => {
         if (response.num) {
             domManip(response);
             history.pushState({}, null, `${comicNum}`);
-        } else {
-            swal({
-                title: "The comic number does not exist.",
-                icon: "warning",
-                dangerMode: true,
-            });
         }
+    }).catch(() => {
+        swal({
+            title: "The comic number does not exist.",
+            icon: "warning",
+            dangerMode: true,
+        });
     });
 };
 
